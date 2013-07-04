@@ -65,8 +65,15 @@ int any(char s1[], const char s2[]) {
   return -1;
 }
 
-//MAIN
+//Exercise 2-6
+unsigned setbits(unsigned x, int p, int n, unsigned y) {
+  unsigned zeros_and_set_bits = (y & ~(~0 << n)) << (p+1-n);
+  unsigned ones_and_set_bits  = ((y | (~0 << n)) << (p+1-n)) | ~(~0 << (p+1-n));
+  
+  return (x | zeros_and_set_bits) & ones_and_set_bits;
+}
 
+//MAIN
 int main() {
   //Test 2-3
   printf("%d\n", htoi("-ff"));
@@ -87,6 +94,15 @@ int main() {
   
   printf("Letter in common should be 3: %d\n", any(s4, s3));
   printf("No letter in common: %d\n", any(s5, s3));
+  
+  
+  //Test 2-6
+  unsigned bits1 = 3483; //110110011011
+  unsigned bits2 = 60; //111100
+  
+  unsigned res = setbits(bits1, 6, 4, bits2);
+  unsigned should_be = 3555; //110111100011
+  printf("Is: %u, should be: %u\n", res, should_be);
   
   return 0;
 }
