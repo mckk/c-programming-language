@@ -22,7 +22,7 @@ void squeeze(char s1[], const char s2[]) {
 
 int main() {
   char s1[] = "hello";
-  char s2[] = "hasl";
+  const char s2[] = "hasl";
   
   squeeze(s1, s2);
   
