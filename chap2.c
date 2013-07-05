@@ -73,6 +73,12 @@ unsigned setbits(unsigned x, int p, int n, unsigned y) {
   return (x | zeros_and_set_bits) & ones_and_set_bits;
 }
 
+//Exercise 2-7
+unsigned invert(unsigned x, int p, int n) {
+  unsigned inversion = ~(x >> (p+1-n));
+  return setbits(x, p, n, inversion);
+}
+
 //MAIN
 int main() {
   //Test 2-3
@@ -100,9 +106,15 @@ int main() {
   unsigned bits1 = 3483; //110110011011
   unsigned bits2 = 60; //111100
   
-  unsigned res = setbits(bits1, 6, 4, bits2);
-  unsigned should_be = 3555; //110111100011
-  printf("Is: %u, should be: %u\n", res, should_be);
+  unsigned res1 = setbits(bits1, 6, 4, bits2);
+  unsigned should_be1 = 3555; //110111100011
+  printf("Is: %u, should be: %u\n", res1, should_be1);
+  
+  //Test 2-7
+  unsigned res2 = invert(bits1, 7, 4);
+  unsigned should_be2 = 3435; //110101101011
+  printf("Is: %u, should be: %u\n", res2, should_be2);
+  
   
   return 0;
 }
