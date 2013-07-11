@@ -91,6 +91,30 @@ unsigned rightrot(unsigned x, int n) {
   return x;
 }
 
+//Exercise 2-9
+//If x is odd it ends in 1. x-1 is just x with the last bit set to 0. x&(x-1) is just x-1.
+//If x is even x-1 sets all the right most 0 to 1 and the rightmost 1 to 0. x&(x-1) sets
+//everything up to and including that 1 to 0.
+int bitcount(unsigned x) {
+  int b = 0;
+  while (x != 0) {
+    b++;
+    x &= (x-1);
+  }
+  return b;
+}
+
+int oldbitcount(unsigned x) {
+  int b;
+
+  for (b = 0; x != 0; x >>= 1) {
+    if (x & 01)
+      b++;
+
+  }
+  return b;
+}
+
 //MAIN
 int main() {
   //Test 2-3
@@ -131,6 +155,9 @@ int main() {
   unsigned res3 = rightrot(bits1, 6);
   unsigned should_be3 = 1811939382;
   printf("Is: %u, should be: %u\n", res3, should_be3);
-  
+ 
+  //Test 2-9
+  printf("Bitcount: %d, Oldbitcount: %d\n", bitcount(bits1), oldbitcount(bits1));
+
   return 0;
 }
