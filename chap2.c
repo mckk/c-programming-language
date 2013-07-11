@@ -115,6 +115,11 @@ int oldbitcount(unsigned x) {
   return b;
 }
 
+//Exercise 2-10
+int lower(int c) {
+  return (c >= 'A' && c <= 'Z') ? c + 'a' - 'A' : c;
+}
+
 //MAIN
 int main() {
   //Test 2-3
@@ -159,5 +164,8 @@ int main() {
   //Test 2-9
   printf("Bitcount: %d, Oldbitcount: %d\n", bitcount(bits1), oldbitcount(bits1));
 
+  //Test 2-10
+  printf("H transforms to %c\n", lower('H'));
+  
   return 0;
 }
