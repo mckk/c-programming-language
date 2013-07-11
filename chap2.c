@@ -79,6 +79,18 @@ unsigned invert(unsigned x, int p, int n) {
   return setbits(x, p, n, inversion);
 }
 
+//Exercise 2-8
+unsigned rightrot(unsigned x, int n) {
+  for ( ; n > 0; n--) {
+    if (x & 1) {
+      x = (x >> 1) | ~(~0U >> 1);
+    } else {
+      x = (x >> 1);
+    }
+  }
+  return x;
+}
+
 //MAIN
 int main() {
   //Test 2-3
@@ -115,6 +127,10 @@ int main() {
   unsigned should_be2 = 3435; //110101101011
   printf("Is: %u, should be: %u\n", res2, should_be2);
   
+  //Test 2-8
+  unsigned res3 = rightrot(bits1, 6);
+  unsigned should_be3 = 1811939382;
+  printf("Is: %u, should be: %u\n", res3, should_be3);
   
   return 0;
 }
