@@ -48,6 +48,43 @@ void escape(char s[], char t[]) {
   t[j] = '\0';
 }
 
+char getDescapedChar(char c) {
+  switch (c) {
+  case 't':
+    return '\t';
+  case 'n':
+    return '\n';
+  }
+  return '\\';
+}
+
+void descape(char s[], char t[]) {
+  int i = 0;
+  int j = 0;
+  char c;
+  while (s[i] != '\0') {
+    switch (s[i]) {
+    case '\\':
+      c = getDescapedChar(s[i+1]);
+      switch (c) {
+      case '\\':
+        t[j++] = '\\';
+        break;
+      default:
+        t[j++] = c;
+        i++;
+        break;
+      }
+      break;
+    default:
+      t[j++] = s[i];
+      break;
+    }
+    i++;
+  }
+  t[j] = '\0';
+}
+
 
 int main() {
   // Testing Exercise 3-1
@@ -59,7 +96,7 @@ int main() {
   printf("Should be -1, is %d\n", binarysearch(2, a3, 5));
 
   // Testing Exercise 3-2
-  char s[] = "Hello\t\nJohn\t";
+  char s[] = "Hi\\ello\t\nJohn\t";
   char t[] = "aaaaaaaaaaaaaaaaaaaaaaa";
 
   printf("Before:\n");
@@ -70,4 +107,7 @@ int main() {
   printf("After:\n");
   printf("One:\n%s\n", s);
   printf("Two:\n%s\n", t);
+
+  descape(t,s);
+  printf("Descaped:\n%s\n", s);
 }
