@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <ctype.h>
 
 // Exercise 3-1
 int binarysearch(int x, int v[], int n) {
@@ -86,6 +87,35 @@ void descape(char s[], char t[]) {
 }
 
 
+// Exercise 3-3
+
+int insertrange(char from, char to, char s[]) {
+  if (!isalnum(from) || !isalnum(to)) {
+    return 0;
+  }
+
+  int i = 0;
+  char c;
+  for (c = from+1; c < to; c++) {
+    s[i++] = c;
+  }
+  return i;
+}
+
+void expand(char s1[], char s2[]) {
+  int i;
+  int j = 0;
+  for (i=0; s1[i] != '\0'; i++) {
+    if (s1[i] == '-' && (i-1) > 0) {
+      j += insertrange(s1[i-1], s1[i+1], &s2[j]);
+    } else {
+      s2[j++] = s1[i];
+    } 
+  }
+  s2[j] = '\0';
+}
+
+
 int main() {
   // Testing Exercise 3-1
   int a1[] = {1, 2, 3, 4};
@@ -110,4 +140,12 @@ int main() {
 
   descape(t,s);
   printf("Descaped:\n%s\n", s);
+
+  // Testing Exercise 3-3
+  char expandable[] = "-a-z0-9";
+  char another[] = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+
+  expand(expandable, another);
+
+  printf("%s\n", another);
 }
