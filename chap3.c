@@ -1,5 +1,20 @@
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
+#include <limits.h>
+
+// Util
+
+void reverse(char s[]) {
+  int len = strlen(s);
+  int i;
+
+  for (i = 0; i < len/2; i++) {
+    char tmp = s[i];
+    s[i] = s[len-1-i];
+    s[len-1-i] = tmp;
+  }
+}
 
 // Exercise 3-1
 int binarysearch(int x, int v[], int n) {
@@ -88,7 +103,6 @@ void descape(char s[], char t[]) {
 
 
 // Exercise 3-3
-
 int insertrange(char from, char to, char s[]) {
   if (!isalnum(from) || !isalnum(to)) {
     return 0;
@@ -115,6 +129,30 @@ void expand(char s1[], char s2[]) {
   s2[j] = '\0';
 }
 
+// Exercise 3-4
+void itoa(int n, char s[]) {
+  int i, sign;
+
+  if (n < 0) {
+    sign = -1;
+  } else {
+    sign = 1;
+  }
+ 
+  i = 0;
+  do {
+    s[i++] = sign*(n % (sign*10)) + '0';
+    n = sign*(n / (sign*10));
+  } while (n != 0);
+
+  if (sign < 0) {
+    s[i++] = '-';  
+  }
+
+  s[i] = '\0';
+
+  reverse(s);
+}
 
 int main() {
   // Testing Exercise 3-1
@@ -148,4 +186,11 @@ int main() {
   expand(expandable, another);
 
   printf("%s\n", another);
+
+  // Testing Exercise 3-4
+  char snum[] = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+
+  itoa(INT_MIN, snum);
+  printf("%s\n", snum);
+
 }
