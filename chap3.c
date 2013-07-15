@@ -154,6 +154,40 @@ void itoa(int n, char s[]) {
   reverse(s);
 }
 
+// Exercise 3-5
+
+char tochar(int n) {
+  if (n < 10) {
+    return '0' + n;
+  }
+  return 'A' + (n-10);
+}
+
+void itob(int n, char s[], int b) {
+  int i, sign;
+
+  if (n < 0) {
+    sign = -1;
+  } else {
+    sign = 1;
+  }
+ 
+  i = 0;
+  do {
+    int num =  sign*(n % (sign*b)); 
+    s[i++] = tochar(num);
+    n = sign*(n / (sign*b));
+  } while (n != 0);
+
+  if (sign < 0) {
+    s[i++] = '-';  
+  }
+
+  s[i] = '\0';
+
+  reverse(s);
+}
+
 int main() {
   // Testing Exercise 3-1
   int a1[] = {1, 2, 3, 4};
@@ -191,6 +225,11 @@ int main() {
   char snum[] = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 
   itoa(INT_MIN, snum);
+  printf("%s\n", snum);
+
+  // Testing Exercise 3-5
+  
+  itob(-30250, snum, 16);
   printf("%s\n", snum);
 
 }
