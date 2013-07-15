@@ -188,6 +188,43 @@ void itob(int n, char s[], int b) {
   reverse(s);
 }
 
+// Exercise 3-6
+void itoapad(int n, char s[], int pad) {
+  int i, sign;
+
+  if (n < 0) {
+    sign = -1;
+  } else {
+    sign = 1;
+  }
+ 
+  i = 0;
+  do {
+    s[i++] = sign*(n % (sign*10)) + '0';
+    n = sign*(n / (sign*10));
+  } while (n != 0);
+
+
+  if (sign < 0) {
+    pad = pad - i - 1;
+  } else {
+    pad = pad - i;
+  }
+
+  if (sign < 0) {
+    s[i++] = '-';  
+  }
+
+  while (pad > 0) {
+    s[i++] = '_';
+    pad--;
+  }
+
+  s[i] = '\0';
+
+  reverse(s);
+}
+
 int main() {
   // Testing Exercise 3-1
   int a1[] = {1, 2, 3, 4};
@@ -227,9 +264,11 @@ int main() {
   itoa(INT_MIN, snum);
   printf("%s\n", snum);
 
-  // Testing Exercise 3-5
-  
+  // Testing Exercise 3-5 
   itob(-30250, snum, 16);
   printf("%s\n", snum);
 
+  // Testing Exercise 3-6 
+  itoapad(-3025, snum, 10);
+  printf("%s\n", snum);
 }
