@@ -133,11 +133,7 @@ void expand(char s1[], char s2[]) {
 void itoa(int n, char s[]) {
   int i, sign;
 
-  if (n < 0) {
-    sign = -1;
-  } else {
-    sign = 1;
-  }
+  sign = (n < 0) ? -1 : 1;
  
   i = 0;
   do {
