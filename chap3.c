@@ -252,14 +252,14 @@ int main() {
 
   // Testing Exercise 3-3
   char expandable[] = "-a-z0-9";
-  char another[] = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+  char another[128]; 
 
   expand(expandable, another);
 
   printf("%s\n", another);
 
   // Testing Exercise 3-4
-  char snum[] = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+  char snum[128];
 
   itoa(INT_MIN, snum);
   printf("%s\n", snum);
