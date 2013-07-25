@@ -14,3 +14,11 @@ void ungetch(char ch) {
   else
     buf[bufp++] = ch;
 }
+
+//Exercise 4-7
+void ungets(char s[]) {
+  int i;
+  for (i = 0; s[i] != '\0'; i++) {
+    ungetch(s[i]);
+  }
+}
