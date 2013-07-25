@@ -1,3 +1,4 @@
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "calc.h"
@@ -5,6 +6,7 @@
 
 int main() {
   int type;
+  double op1;
   double op2;
   char s[MAXOP];
 
@@ -25,10 +27,20 @@ int main() {
       break;
     case '/':
       op2 = pop();
-      if (op2 != 0.0)
+      if (op2 != 0.0) {
         push(pop() / op2);
-      else
+      } else {
         printf("error: zero divisor\n");
+      }
+      break;
+    case '%':
+      op2 = pop();
+      op1 = pop();
+      if (op2 != 0.0 && floorf(op1) == op1 && floorf(op2) == op2) {
+        push((int)op1 % (int)op2);
+      } else {
+        printf("error: wrong operand types\n");
+      }
       break;
     case '\n':
       printf("\t%.8g\n", pop());
