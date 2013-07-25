@@ -62,6 +62,14 @@ int main() {
       printf("\t%.8g\n", peek());
       break;
 
+    // Exercise 4-6
+    case VARGET:
+      push(get(s[0]));
+      break;
+    case VARPUT:
+      put(s[0], peek());
+      break;
+
     case '\n':
       printf("\t%.8g\n", pop());
       break;

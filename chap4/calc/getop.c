@@ -13,6 +13,15 @@ int getop(char s[]) {
     ;
   s[1] = '\0';
 
+  // Exercise 4-6
+  // If alpha, the letter represents a variable
+  if (isalpha(c1)) {
+    if (c1 >= 'A' && c1 <= 'Z') // capital so save
+      return VARPUT;
+    else // lowercase so get
+      return VARGET;
+  }
+
   if (!isdigit(c1) && c1 != '.' && c1 != '-' && c1 != '+')
     return c1;
 
