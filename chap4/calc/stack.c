@@ -19,3 +19,17 @@ double pop(void) {
     return 0.0;
   }
 }
+
+//Exercise 4-4
+double peek(void) {
+  if (sp > 0) {
+    return val[sp-1];
+  } else {
+    printf("error: stack empty\n");
+    return 0.0;
+  }
+}
+
+void clear(void) {
+  sp = 0;
+}

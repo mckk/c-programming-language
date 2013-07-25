@@ -42,6 +42,26 @@ int main() {
         printf("error: wrong operand types\n");
       }
       break;
+
+    //Exercise 4-4
+    case '#':
+      op1 = pop();
+      push(op1);
+      push(op1);
+      break;
+    case '$':
+      op1 = pop();
+      op2 = pop();
+      push(op1);
+      push(op2);
+      break;
+    case '`':
+      clear();
+      break;
+    case '@':
+      printf("\t%.8g\n", peek());
+      break;
+
     case '\n':
       printf("\t%.8g\n", pop());
       break;
