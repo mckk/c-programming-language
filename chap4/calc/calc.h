@@ -12,6 +12,9 @@ void clear(void);
 double get(char);
 void put(char, double);
 
-int getop(char []);
+//getch stuff
 int getch(void);
 void ungetch(int);
+void ungets(char[]);
+
+int getop(char []);
