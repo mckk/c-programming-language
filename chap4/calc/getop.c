@@ -2,7 +2,8 @@
 #include <ctype.h>
 #include "calc.h"
 
-/* getop: get next operator or numeric operand */
+/* getop: get next operator or numeric operand
+ * Negative number parsing is exercise 4-3*/
 int getop(char s[]) {
   int i;
   char c1, c2;

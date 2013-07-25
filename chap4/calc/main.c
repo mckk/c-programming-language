@@ -33,7 +33,7 @@ int main() {
         printf("error: zero divisor\n");
       }
       break;
-    case '%':
+    case '%': //Exercise 4-3
       op2 = pop();
       op1 = pop();
       if (op2 != 0.0 && floorf(op1) == op1 && floorf(op2) == op2) {
