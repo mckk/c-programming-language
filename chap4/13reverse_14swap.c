@@ -1,13 +1,16 @@
 #include <stdio.h>
 #include <string.h>
+// There will a problem if either X or Y is called tmp.
+// I'm not really sure how to fix it yet.
+// Exercise 4-14
+#define SWAP(T, X, Y) {T tmp = X; X = Y; Y = tmp;}
 
+// Exerciese 4-13
 void reverse_h(char s[], int bot, int top) {
   if (bot >= top) {
     return;
   }
-  char tmp = s[bot];
-  s[bot] = s[top];
-  s[top] = tmp;
+  SWAP(char, s[bot], s[top]);
   reverse_h(s, bot+1, top-1);
 }
 
