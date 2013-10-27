@@ -1,29 +1,48 @@
 #include <stdio.h>
+#include <assert.h>
 
 static char daytab[2][13] = {
   {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
   {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
 };
 
+int is_leap(int year)
+{
+  return (year%4 == 0 && year%100 != 0) || year%400 == 0;
+}
+
 int day_of_year(int year, int month, int day)
 {
   int i, leap;
+
+  leap = is_leap(year);
   
-  leap = (year%4 == 0 && year%100 != 0) || year%400 == 0;
+  if (day > daytab[leap][month] || day <= 0
+      || month <= 0 || month >= 13)
+    return -1;
+
   for (i = 1; i < month; i++)
     day += daytab[leap][i];
+
   return day;
 }
 
-void month_day(int year, int yearday, int *pmonth, int *pday)
+int month_day(int year, int yearday, int *pmonth, int *pday)
 {
-  int i, leap;
+  int i, leap, yearlength;
 
-  leap = (year%4 == 0 && year%100 != 0) || year%400 == 0;
+  leap = is_leap(year);
+  
+  yearlength = leap ? 366 : 365;
+  if (yearday <= 0 || yearday > yearlength)
+    return -1;
+
   for (i = 1; yearday > daytab[leap][i]; i++)
     yearday -= daytab[leap][i];
   *pmonth = i;
   *pday = yearday;
+
+  return 0;
 }
 
 
@@ -46,4 +65,16 @@ int main()
   int leap_day;
   month_day(2012, 274, &leap_month, &leap_day);
   printf("Leap month day should be 9-30, it is %d-%d\n", leap_month, leap_day);
+
+  //Test of day_of_year error
+  printf("Should be -1, %d\n", day_of_year(2012, 13, 1));
+  printf("Should be -1, %d\n", day_of_year(2012, 0, 1));
+  printf("Should be -1, %d\n", day_of_year(2012, 2, -10));
+  printf("Should be -1, %d\n", day_of_year(2012, 2, 30));
+
+  //Test of month_day error
+  printf("Should be 0, %d\n", month_day(2012, 366, &leap_day, &leap_month));
+  printf("Should be -1, %d\n", month_day(2012, 367, &leap_day, &leap_month));
+  printf("Should be 0, %d\n", month_day(2011, 365, &leap_day, &leap_month));
+  printf("Should be -1, %d\n", month_day(2011, 366, &leap_day, &leap_month));
 }
